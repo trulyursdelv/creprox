@@ -21,12 +21,12 @@ module.exports = async (req, res) => {
   const chunks = [];
   req.on("data", chunk => chunks.push(chunk));
   req.on("end", async () => {
-    const body = chunks.length > 0 ? Buffer.concat(chunks).toString() : undefined;
+    const body = Buffer.concat(chunks).toString();
     
     const action = await fetch(url, {
       method: req.method,
       headers: req.headers,
-      body
+      body: chunks.length > 0 ? body : undefined
     });
     const data = await action.text();
     res.status(200).end(data.toString());
