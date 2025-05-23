@@ -20,10 +20,12 @@ module.exports = async (req, res) => {
     const buffer = chunks.length > 0 ? Buffer.concat(chunks) : undefined;
     
     const data = await startTransaction(req.method, url, req.headers, buffer);
+    const headers = {};
     data.headers.forEach((v, k) => {
+      headers[k] = v;
       res.setHeader(k, v);
     });
-    console.info(JSON.stringify(data.headers));
+    console.info(JSON.stringify(headers));
     res.status(data.status).end(data.body);
   });
 }
