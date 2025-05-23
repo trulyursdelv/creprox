@@ -21,9 +21,9 @@ module.exports = async (req, res) => {
     
     const data = await startTransaction(req.method, url, req.headers, buffer);
     data.headers.forEach((v, k) => {
-      res.setHeader(k, v);
+      if(k == "content-type") res.setHeader("Content-Type", v);
+      else res.setHeader(k, v);
     });
-    res.setHeader("Content-Type", data.headers["content-type"]);
     res.status(data.status).end(data.body);
   });
 }
