@@ -1,6 +1,7 @@
 function parseHeaders(headers) {
+  console.info(typeof headers);
   const options = {};
-  Object.fromEntries(headers.entries()).forEach((v, k) => options[k] = v);
+  headers.forEach((v, k) => options[k] = v);
   return options;
 }
 
