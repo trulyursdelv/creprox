@@ -5,16 +5,10 @@ async function startTransaction(method, url, headers, body) {
     const req = await fetch(url, {
       method, headers, body
     });
-    const stream = Readable.fromWeb(req.body);
-    const chunks = [];
-    stream.on("data", chunk => chunks.push(chunk));
-    stream.on("end", () => {
-      const buffer = Buffer.concat(chunks);
-      resolve({
-        status: req.status,
-        headers: req.headers,
-        body: buffer
-      });
+    resolve({
+      status: req.status,
+      headers: req.headers,
+      body: await req.body.blob()
     });
   });
 }
