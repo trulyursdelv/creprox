@@ -3,10 +3,11 @@ async function startTransaction(method, url, headers, body) {
     const req = await fetch(url, {
       method, headers, body
     });
+    const body = await req.text();
     resolve({
       status: req.status,
       headers: req.headers,
-      body: await req.text()
+      body: body.toString()
     });
   });
 }
@@ -24,6 +25,6 @@ module.exports = async (req, res) => {
       if(k == "content-type") res.setHeader("Content-Type", "text/plain");
       else res.setHeader(k, v);
     });
-    res.status(data.status).end(data.body.toString());
+    res.status(data.status).end(data.body);
   });
 }
