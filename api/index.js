@@ -32,8 +32,12 @@ module.exports = async (req, res) => {
       headers: req.headers,
       body
     });
+    action.headers.forEach((v, k) => {
+      if(k == "content-type") return;
+      res.setHeader(k, v);
+    });
     const data = await action.text();
-    res.status(200).end("OK: " + data.toString());
+    res.status(200).end(data.toString());
   });
   req.on("error", () => {
     res.status(200).end("oops!");
