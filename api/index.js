@@ -11,7 +11,7 @@ async function startTransaction(method, url, headers, body) {
     stream.on("end", () => {
       const buffer = Buffer.concat(chunks);
       resolve({
-        status: req.statusCode,
+        status: req.status,
         headers: req.headers,
         body: buffer
       });
