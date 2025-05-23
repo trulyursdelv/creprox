@@ -22,12 +22,18 @@ module.exports = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   
   const url = `https:/${req.url}`;
-  // const data = await startTransaction(req.method, url, req.headers, req.on);
   const chunks = [];
   req.on("data", chunk => chunks.push(chunk));
-  req.on("end", () => {
-    const body = chunks.length > 0 ? Buffer.concat(chunks).toString() : "0x0000";
-    res.status(200).end("OK: " + body);
+  req.on("end", async () => {
+    const body = chunks.length > 0 ? Buffer.concat(chunks).toString() : undefined;
+    
+    const action = await fetch(url, {
+      method: req.method,
+      headers: req.headers,
+      body
+    });
+    const data = await action.text();
+    res.status(200).end("OK: " + data.toString());
   });
   req.on("error", () => {
     res.status(200).end("oops!");
