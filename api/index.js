@@ -12,17 +12,18 @@ async function startTransaction(method, url, headers, body) {
   });
 }
 
+async function startTransaction(method, url, headers, when) {
+  const body = !["GET", "OPTIONS"].includes(method) ? 
+}
+
 module.exports = async (req, res) => {
   res.setHeader("Content-Type", "text/plain");
   res.setHeader("Access-Control-Allow-Methods", "*");
   res.setHeader("Access-Control-Allow-Origin", "*");
   
   const url = `https:/${req.url}`;
-  
-  req.on("end", async () => {
-    const data = await startTransaction(req.method, url, req.headers, undefined);
-    res.status(200).end(JSON.stringify(data));
-  });
+  // const data = await startTransaction(req.method, url, req.headers, req.on);
+  res.status(200).end(req.body);
   //const chunks = [];
   /*req.on("data", chunk => chunks.push(chunk));
   req.on("end", async () => {
