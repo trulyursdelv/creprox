@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
   const chunks = [];
   req.on("data", chunk => chunks.push(chunk));
   req.on("end", async () => {
-    const buffer = Buffer.concat(chunks);
+    const buffer = chunks.length > 0 ? Buffer.concat(chunks) : undefined;
     
     const data = await startTransaction(req.method, url, req.headers, buffer);
     for(const header in data.headers) {
