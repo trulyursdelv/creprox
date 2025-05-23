@@ -28,10 +28,6 @@ module.exports = async (req, res) => {
       headers: req.headers,
       body
     });
-    action.headers.forEach((v, k) => {
-      if(k == "content-type") return;
-      res.setHeader(k, v);
-    });
     const data = await action.text();
     res.status(200).end(data.toString());
   });
