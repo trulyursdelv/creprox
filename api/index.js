@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
   res.setHeader("Content-Type", "text/plain");
   res.setHeader("Access-Control-Allow-Methods", "*");
   res.setHeader("Access-Control-Allow-Origin", "*");
-  
+  /*
   const url = `https:/${req.url}`;
   return new Promise(resolve => {
     const chunks = [];
@@ -30,5 +30,5 @@ module.exports = async (req, res) => {
       });
       resolve(res.status(data.status).end(data.body));
     });
-  });
+  });*/
 }
