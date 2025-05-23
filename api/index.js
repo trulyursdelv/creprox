@@ -17,7 +17,8 @@ module.exports = async (req, res) => {
   res.setHeader("Access-Control-Allow-Methods", "*");
   res.setHeader("Access-Control-Allow-Origin", "*");
   
-  res.status(200).end("OK");
+  const data = await startTransaction(req.method, url, req.headers, undefined);
+  res.status(200).end(JSON.stringify(data));
   //const chunks = [];
   /*req.on("data", chunk => chunks.push(chunk));
   req.on("end", async () => {
