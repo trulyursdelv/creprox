@@ -23,10 +23,7 @@ async function startTransaction(method, url, headers, body) {
 }
 
 module.exports = async (req, res) => {
-  const path = req.url.slice(1);
-  const protocol = path.slice(0, path.indexOf("/"));
-  const address = path.slice(path.indexOf("/") + 1);
-  const url = `${protocol}://${address}`;
+  const url = `https://${req.url.slice(1)}`;
   
   const chunks = [];
   req.on("data", chunk => chunks.push(chunk));
