@@ -13,6 +13,9 @@ async function startTransaction(method, url, headers, body) {
 }
 
 module.exports = async (req, res) => {
+  res.setHeader("Content-Type", "text/plain");
+  res.setHeader("Access-Control-Allow-Methods", "*");
+  res.setHeader("Access-Control-Allow-Origin", "*");
   const url = `https:/${req.url}`;
   
   const chunks = [];
@@ -22,11 +25,11 @@ module.exports = async (req, res) => {
     
     const data = await startTransaction(req.method, url, req.headers, buffer);
     data.headers.forEach((v, k) => {
-      if(k == "content-type") res.setHeader("Content-Type", "text/plain");
-      else res.setHeader(k, v);
+      if(k == "content-type") return;
+      res.setHeader(k, v);
     });
-    console.info("Status:", data.status);
-    console.info("Body:", data.body);
+    console.info("Status:", data.status, typeof data.status);
+    console.info("Body:", data.body, typeof data.body);
     res.statusCode = data.status;
     res.end(data.body);
   });
