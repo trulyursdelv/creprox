@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
     
     const data = await startTransaction(req.method, url, req.headers, buffer);
     for(const header in data.headers) {
-      res.setHeader(header, data.headers[header]);
+      res.setHeader(header.replace(/[^a-z0-9\-]/gi, ""), data.headers[header]);
     }
     res.status(data.status).end(data.body);
   });
