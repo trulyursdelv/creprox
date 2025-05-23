@@ -3,11 +3,11 @@ async function startTransaction(method, url, headers, body) {
     const req = await fetch(url, {
       method, headers, body
     });
-    const body = await req.text();
+    const res = await req.text();
     resolve({
       status: req.status,
       headers: req.headers,
-      body: body.toString()
+      body: res.toString()
     });
   });
 }
