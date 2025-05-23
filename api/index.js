@@ -26,7 +26,8 @@ module.exports = async (req, res) => {
   const chunks = [];
   req.on("data", chunk => chunks.push(chunk));
   req.on("end", () => {
-    res.status(200).end("OK");
+    const body = Buffer.concat(chunks).toString();
+    res.status(200).end("OK: " + body);
   });
   req.on("error", () => {
     res.status(200).end("oops!");
