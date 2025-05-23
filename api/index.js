@@ -12,9 +12,9 @@ async function startTransaction(method, url, headers, body) {
   });
 }
 
-async function startTransaction(method, url, headers, when) {
+/*async function startTransaction(method, url, headers, when) {
   const body = !["GET", "OPTIONS"].includes(method) ? 
-}
+}*/
 
 module.exports = async (req, res) => {
   res.setHeader("Content-Type", "text/plain");
