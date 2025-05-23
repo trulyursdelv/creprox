@@ -17,7 +17,7 @@ async function startTransaction(method, url, headers, body) {
 }
 
 module.exports = async (req, res) => {
-  const url = `https://${req.url.slice(1)}`;
+  const url = `https:/${req.url}`;
   
   const chunks = [];
   req.on("data", chunk => chunks.push(chunk));
