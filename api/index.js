@@ -1,5 +1,3 @@
-const { Readable } = require("stream");
-
 async function startTransaction(method, url, headers, body) {
   return new Promise(async resolve => {
     const req = await fetch(url, {
@@ -8,7 +6,7 @@ async function startTransaction(method, url, headers, body) {
     resolve({
       status: req.status,
       headers: req.headers,
-      body: await req.body.blob()
+      body: await req.text()
     });
   });
 }
