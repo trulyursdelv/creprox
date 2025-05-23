@@ -25,6 +25,9 @@ module.exports = async (req, res) => {
       if(k == "content-type") res.setHeader("Content-Type", "text/plain");
       else res.setHeader(k, v);
     });
-    res.status(data.status).end(data.body);
+    console.info("Status:", data.status);
+    console.info("Body:", data.body);
+    res.statusCode = data.status;
+    res.end(data.body);
   });
 }
