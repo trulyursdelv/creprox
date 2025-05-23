@@ -23,7 +23,14 @@ module.exports = async (req, res) => {
   
   const url = `https:/${req.url}`;
   // const data = await startTransaction(req.method, url, req.headers, req.on);
-  res.status(200).end(req.body);
+  const chunks = [];
+  req.on("data", chunk => chunks.push(chunk));
+  req.on("end", () => {
+    res.status(200).end("OK");
+  });
+  req.on("error", () => {
+    res.status(200).end("oops!");
+  })
   //const chunks = [];
   /*req.on("data", chunk => chunks.push(chunk));
   req.on("end", async () => {
