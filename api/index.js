@@ -23,6 +23,7 @@ module.exports = async (req, res) => {
     data.headers.forEach((v, k) => {
       res.setHeader(k, v);
     });
+    console.info(data.body);
     res.status(data.status).end(data.body);
   });
 }
