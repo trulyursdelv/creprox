@@ -28,9 +28,9 @@ module.exports = async (req, res) => {
     const buffer = chunks.length > 0 ? Buffer.concat(chunks) : undefined;
     
     const data = await startTransaction(req.method, url, req.headers, buffer);
-    for(const header in data.headers) {
-      res.setHeader(header, data.headers[header].replace(/[\n\r]/g, ""));
-    }
+    data.headers.forEach((v, k) => {
+      res.setHeader(k, v);
+    });
     res.status(data.status).end(data.body);
   });
 }
