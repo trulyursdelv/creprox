@@ -1,11 +1,14 @@
+const { Readable } = require("stream");
+
 async function startTransaction(method, url, headers, body) {
   return new Promise(async resolve => {
     const req = await fetch(url, {
       method, headers, body
     });
+    const stream = Readable.fromWeb(req.body);
     const chunks = [];
-    req.body.on("data", chunk => chunks.push(chunk));
-    req.body.on("end", () => {
+    stream.on("data", chunk => chunks.push(chunk));
+    stream.on("end", () => {
       const buffer = Buffer.concat(chunks);
       resolve({
         status: req.statusCode,
