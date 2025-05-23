@@ -24,6 +24,6 @@ module.exports = async (req, res) => {
       if(k == "content-type") res.setHeader("Content-Type", v.split(";")[0]);
       else res.setHeader(k, v);
     });
-    res.status(data.status).end(data.body);
+    res.status(data.status).end(data.body.toString());
   });
 }
