@@ -1,5 +1,7 @@
 ## creprox :telescope:
 
+[![Try it online](https://badgers.space/badge/Try%20On/example.com?icon=feather-radio&color=teal&scale=1.2&corner_radius=3)](https://creprox.vercel.app/example.com)
+
 Fast, open-source, and on-the-go rest API for performing HTTP requests with CORS enabled.
 
 ```http
