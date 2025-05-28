@@ -31,8 +31,6 @@ module.exports = async (req, res) => {
     const buffer = Buffer.from(data);
     
     res.setHeader("Content-Length", buffer.length);
-    res.setHeader("Content-Type", action.headers["content-type"]);
-    
     res.status(action.status).end(buffer);
   });
 };
