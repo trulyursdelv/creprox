@@ -1,4 +1,4 @@
-const { Readable } = require("stream");
+const fetch = require('node-fetch');
 
 module.exports = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -29,12 +29,7 @@ module.exports = async (req, res) => {
       res.setHeader(key, value);
     });
     
-    const blob = await action.blob();
-    const readable = Readable.fromWeb(blob.stream());
-    
-    console.info(action.body.pipe);
-    
     res.status(action.status);
-    readable.pipe(res);
+    action.body.pipe(res);
   });
 };
