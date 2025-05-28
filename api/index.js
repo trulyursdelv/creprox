@@ -27,16 +27,7 @@ module.exports = async (req, res) => {
       res.setHeader(key, value);
     });
     
-    const blob = await action.blob();
-    const reader = blob.stream().getReader();
-    const buffer = [];
-    
-    while(true) {
-      const { value, done } = await reader.read();
-      if(done) break;
-      buffer.push(Buffer.from(value));
-    }
-    
-    res.status(action.status).end(Buffer.concat(buffer));
+    const buffer = await action.arrayBuffer();
+    res.status(action.status).end(Buffer.from(buffer));
   });
 };
