@@ -14,7 +14,13 @@ module.exports = async (req, res) => {
       headers: req.headers,
       body: chunks.length > 0 ? body : undefined
     });
-    const data = await action.text();
-    res.status(200).end(data.toString());
+    
+    for(const key in action.headers) {
+      const header = action.headers[key];
+      res.setHeader(key, header);
+    }
+    
+    const data = await action.blob();
+    res.status(action.status).end(data);
   });
 }
