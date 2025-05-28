@@ -29,7 +29,10 @@ module.exports = async (req, res) => {
     
     const data = await action.arrayBuffer();
     const buffer = Buffer.from(data);
+    
     res.setHeader("Content-Length", buffer.length);
+    res.setHeader("Content-Type", action.header["content-type"]);
+    
     res.status(action.status).end(buffer);
   });
 };
