@@ -29,15 +29,14 @@ module.exports = async (req, res) => {
     
     const blob = await action.blob();
     const reader = blob.stream().getReader();
+    const buffer = [];
     
     while(true) {
       const { value, done } = await reader.read();
       if(done) break;
-      console.info(value.toString());
-      res.write(Buffer.from(value));
+      buffer.push(Buffer.from(value));
     }
     
-    res.status(action.status);
-    res.end();
+    res.status(action.status).end(Buffer.concat(buffer));
   });
 };
