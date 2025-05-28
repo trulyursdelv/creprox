@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
     });
     
     action.headers.forEach((value, key) => {
-      res.setHeader(key, value);
+      if(key.startsWith("x-")) res.setHeader(key, value);
     });
     
     res.setHeader("Content-Type", "text/plain");
