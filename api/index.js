@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
     
     for(const key in action.headers) {
       const header = action.headers[key];
-      res.setHeader(key, header);
+      res.setHeader(key, header.toString());
     }
     
     const data = await action.blob();
