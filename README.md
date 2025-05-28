@@ -1,6 +1,6 @@
 ## creprox :telescope:
 
-[![Try it online](https://badgers.space/badge/Try%20On/example.com?icon=feather-radio&color=teal&scale=1.2&corner_radius=3)](https://creprox.vercel.app/example.com)
+[![Try it online](https://badgers.space/badge/Try%20on/example.com?icon=feather-radio&color=teal&scale=1.2&corner_radius=3)](https://creprox.vercel.app/example.com)
 
 Fast, open-source, and on-the-go rest API for performing HTTP requests with CORS enabled.
 
@@ -31,6 +31,19 @@ https://creprox.vercel.app/<URL>
 ```
 
 For security reason and legacy version support, creprox only allows URL with `https` as the protocol.
+
+### Features
+
+**creprox** supports the following:
+
+1. **Request methods** &mdash; The request method depends on what method you use on creprox.
+2. **Request body** &mdash; If a body is provided, it is passed on to the request URL.
+3. **Request headers** &mdash; The request headers depends on the headers you've sent to creprox.
+
+However, the following are the disadvantages:
+
+1. **Response status** &mdash; creprox will always return `200`, to prevent browser-defined error page.
+2. **Response body** &mdash; creprox only supports text-based responses. Responses like images are not recommended.
 
 ## Disclaimer :rotating_light:
 
