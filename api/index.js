@@ -33,7 +33,7 @@ module.exports = async (req, res) => {
     while(true) {
       const { value, done } = await reader.read();
       if(done) break;
-      console.info(Buffer.from(value));
+      console.info(value.toString());
       res.write(Buffer.from(value));
     }
     
