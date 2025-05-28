@@ -16,11 +16,11 @@ module.exports = async (req, res) => {
     });
     
     action.headers.forEach((v, k) => {
-      console.info(k, v);
       res.setHeader(k, v);
     });
     
-    const data = await action.blob();
+    const buffer = await action.arrayBuffer();
+    const data = Buffer.from(buffer);
     res.status(action.status).end(data);
   });
 }
