@@ -1,5 +1,3 @@
-const fetch = require('node-fetch');
-
 module.exports = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "*");
@@ -29,7 +27,16 @@ module.exports = async (req, res) => {
       res.setHeader(key, value);
     });
     
+    const blob = await action.blob();
+    const reader = blob.stream().getReader();
+    
+    while(true) {
+      const { value, done } = await reader.read();
+      if(done) break;
+      res.write(Buffer.from(value));
+    }
+    
     res.status(action.status);
-    action.body.pipe(res);
+    res.end();
   });
 };
