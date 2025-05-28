@@ -3,10 +3,6 @@ module.exports = async (req, res) => {
   res.setHeader("Access-Control-Allow-Methods", "*");
   res.setHeader("Access-Control-Allow-Headers", "*");
   
-  if(req.method === "OPTIONS") {
-    return res.status(204).end();
-  }
-  
   const url = `https:/${req.url}`;
   const chunks = [];
   req.on("data", chunk => chunks.push(chunk));
