@@ -15,11 +15,10 @@ module.exports = async (req, res) => {
       body: chunks.length > 0 ? body : undefined
     });
     
-    for(const key in action.headers) {
-      const header = action.headers[key];
-      console.info(header);
-      res.setHeader(key, header);
-    }
+    action.headers.forEach((v, k) => {
+      console.info(k, v);
+      res.setHeader(k, v);
+    });
     
     const data = await action.blob();
     res.status(action.status).end(data);
