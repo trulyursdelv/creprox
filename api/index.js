@@ -32,6 +32,8 @@ module.exports = async (req, res) => {
     const blob = await action.blob();
     const readable = Readable.fromWeb(blob.stream());
     
+    console.info(action.body);
+    
     res.status(action.status);
     readable.pipe(res);
   });
