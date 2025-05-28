@@ -30,6 +30,8 @@ module.exports = async (req, res) => {
     const data = await action.arrayBuffer();
     const buffer = Buffer.from(data);
     
+    console.info(buffer.length);
+    
     res.setHeader("Content-Length", buffer.length);
     res.status(action.status).end(buffer);
   });
