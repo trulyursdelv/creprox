@@ -27,6 +27,7 @@ module.exports = async (req, res) => {
       res.setHeader(key, value);
     });
     
+    res.setHeader("Content-Type", "text/plain");
     const data = await action.text();
     res.status(action.status).end(data);
   });
