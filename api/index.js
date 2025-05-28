@@ -1,3 +1,5 @@
+const { Readable } = require("stream");
+
 module.exports = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "*");
@@ -27,7 +29,10 @@ module.exports = async (req, res) => {
       res.setHeader(key, value);
     });
     
+    const blob = await action.blob();
+    const readable = Readable.fromWeb(blob.stream());
+    
     res.status(action.status);
-    action.body.pipe(res);
+    readable.pipe(res);
   });
 };
