@@ -27,10 +27,7 @@ module.exports = async (req, res) => {
       res.setHeader(key, value);
     });
     
-    const data = await action.arrayBuffer();
-    const buffer = Buffer.from(data);
-    
-    res.write(buffer);
-    res.status(action.status).end();
+    const data = await action.text();
+    res.status(action.status).end(data);
   });
 };
